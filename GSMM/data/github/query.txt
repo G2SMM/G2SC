@@ -1,0 +1,50 @@
+inputstream to string
+create arraylist from array
+iterate hashmap
+generate random integers in specific range
+string to int
+initialization of an array in one line
+test if an array contains certain value
+lookup enum by string value
+breaking out of nested loops
+declare an array
+generate a random alpha-numeric string
+simplest way to print a java array
+sort a map by values
+fastest way to determine if an integer’s square root is an integer
+concatenate two arrays in java
+create string from the contents of file
+convert stack trace to string
+compare strings in java
+split string in java
+create  file and write to  file
+initialization static map
+iterate through  collection avoiding concurrentmodificationexception when removing in loop
+generate an md5 hash
+get current stack trace
+sort arraylist of custom objects by property
+round number to n decimal places
+pad an integers with zeros on the left
+create a generic array
+read a plain text file
+loop to iterate over enum
+check if at least two out of three booleans are true
+convert from int to string
+convert  char to string
+check if file exists
+java string to date conversion
+convert inputstream to byte array
+check if string is numeric
+copy an object
+time a method’s execution
+read  large text file line by line using java
+make new list
+append text to an existing file
+converting iso compliant string to date
+best way to filter a java collection
+remove whitespace from strings in java
+split string with any whitespace chars as delimiters
+best way to determine the size of an object
+invoke a java method when given the method name as string
+get  platform dependent new line character
+convert map to list
