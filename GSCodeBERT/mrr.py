@@ -12,7 +12,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--test_batch_size', type=int, default=1000)
     args = parser.parse_args()
-    languages = ['java']
+    languages = ['']
     MRR_dict = {}
     top1 = 0
     top5 = 0

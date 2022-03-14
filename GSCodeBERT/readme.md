@@ -1,8 +1,11 @@
 # Code Search
 
 ## Dependency
+
 ```sh
+pip install torch
 pip install transformers
+pip install more_itertools
 ```
 
 ## Data Process
@@ -35,9 +38,14 @@ pip install transformers
   (label, index, index, description, dfscode) is splited with <CODESPLIT>
   ```
 
-​         **process_data.py bulid()** function is used for build train/valid dataset negative samples
+### build train/valid input data 
+
+```sh
+python process_data.py 
+```
 
 ```py
+### bulid()** function is used for build train/valid dataset negative samples
 ###  desc_gs_train.txt/ desc_gs_train.txt is used for Fine-Tune with code graph sequence 
 build('train_gs.json', 'desc_gs_train','code')
 build('valid_gs.json', 'desc_gs_valid','code')
@@ -46,20 +54,19 @@ build('train.json', 'desc_code_train','dfs')
 build('valid.json', 'desc_code_valid','dfs')
 ```
 
-​		 **process_test_data.py** build final test datasets.
-
-​        
-
-For this step, run: 
+### build test input data
 
 ```sh
-python process_data.py
 python process_test_data.py
 ```
 
+
+
 ## Fine-Tune with DFSCode
 
-We further trained the model after adding G2SC data
+We fine-tuned the model on 2*NVIDIA 2080ti GPUs.
+
+We further trained the model after adding DFScode data
 
 ```sh
 bash run_desc_gs.sh
@@ -113,7 +120,7 @@ python3 run_classifier.py \
 --gradient_accumulation_steps 1 \
 --overwrite_output_dir \
 --data_dir ./ \
---output_dir ./desc_code/  \
+--output_dir ./desc_code/ \
 --model_name_or_path $pretrained_model
 
 ```
@@ -141,7 +148,7 @@ do
     --num_train_epochs 8 \
     --test_file batch_${i}.txt \
     --pred_model_dir ./desc_code/checkpoint-best/ \
-    --test_result_dir ./results/$lang/${i}_batch_result.txt
+    --test_result_dir ./results/${i}_batch_result.txt
 done
 ```
 

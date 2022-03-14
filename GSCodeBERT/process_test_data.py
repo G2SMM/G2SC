@@ -22,7 +22,7 @@ def tokening(string):
 def preprocess_test_data(test_batch_size=1000):
     print('begin____')
     DATA_DIR = './test/'
-    path = './data/test.json'
+    path = 'test.json'
     # with gzip.open(path, 'r') as pf:
     #     data = pf.readlines()
     # print("len data, ", len(data))
