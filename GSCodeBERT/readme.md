@@ -7,7 +7,16 @@ pip install torch
 pip install transformers
 pip install more_itertools
 ```
+## Usage 
 
+   ### Data Preparation 
+  We provide a small dummy dataset for quick deployment in root path.  
+  To train and test our model:
+  
+  1) Download and unzip real dataset from [Google Drive](https://drive.google.com/file/d/1Vxv4CfojRA2v-Gb5UT8G8JhtG0Lol4gD/view?usp=sharing)
+  
+  2) Replace each file in the rar file with the corresponding real file. 
+  
 ## Data Process
 
 - The dataset is randomly shuffled, the proportion of training set, validation set and test set is 8:1:1.
