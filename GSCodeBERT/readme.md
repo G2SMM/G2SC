@@ -10,34 +10,47 @@
 
 - The processed datasets is in the data fold.
 
-  train.json, valid.json, test.json is the dataset after 8:1:1 split, only with positive samples
+  train.json, valid.json, test.json is the dataset after 8:1:1 split, only with positive samples, these dataset don't contain graph sequences.  
 
+  train_gs.json, valid_gs.json contain graph sequences, and delete some samples that the code can't convert to PDG 
+  
   ```json
   // 1. train/valid json dataset file description
   "url":sequence number; "code":code sequence; "docstring":natural language summaration for program;
-  "fun_name":is not used,make no difference;"dfs":DFSCode of code 
+  "fun_name":is not used,make no difference;
   
-  // 2.ps_train.txt/ps.valid.txt file description
+  // 2. train_gs/valid_gs json dataset file description
+  "url":sequence number; "code":code sequence; "docstring":natural language summaration for program;
+  "fun_name":is not used,make no difference;"dfs":code graph sequence
+  
+  // 3.desc_code_train.txt/desc_code_valid.txt file description
   (label, index, index, description, code) is splited with <CODESPLIT>
   
-  // 3.desc_dfs_train.txt/desc_dfs_valid.txt file description
+  // 4.desc_gs_train.txt/desc_gs_valid.txt file description
   (label, index, index, description, dfscode) is splited with <CODESPLIT>
   ```
 
-​         **process_data.py bulid()** function is used for build train/valid dataset negative samples;
+​         **process_data.py bulid()** function is used for build train/valid dataset negative samples
+
+```py
+###  desc_gs_train.txt/ desc_gs_train.txt is used for Fine-Tune with code graph sequence 
+build('train_gs.json', 'desc_gs_train','code')
+build('valid_gs.json', 'desc_gs_valid','code')
+### desc_code_train.txt/desc_code_valid.txt is used for CodeSearch Fine-Tune
+build('train.json', 'desc_code_train','dfs')
+build('valid.json', 'desc_code_valid','dfs')
+```
 
 ​		 **process_test_data.py** build final test datasets.
 
-​         In data folder, **desc_dfs_train.txt/ desc_dfs_train.txt** is used for Fine-Tune with G2SC, **ps_train.txt/ps_valid.txt** is used   for  CodeSearch Fine-Tune .
-
 ​        
 
-## Fine-Tune with G2SC
+## Fine-Tune with DFSCode
 
-We further trained the model after adding G2SC data
+We further trained the model after adding DFScode data
 
 ```sh
-./run_desc_dfs.sh
+bash run_desc_gs.sh
 ```
 
 ```sh
@@ -49,8 +62,8 @@ python3 run_classifier.py \
 --do_train \
 --do_eval \
 --eval_all_checkpoints \
---train_file desc_dfs_train.txt \
---dev_file desc_dfs_valid.txt \
+--train_file desc_gs_train.txt \
+--dev_file desc_gs_valid.txt \
 --max_seq_length 200 \
 --per_gpu_train_batch_size 8 \
 --per_gpu_eval_batch_size 8 \
@@ -58,19 +71,19 @@ python3 run_classifier.py \
 --num_train_epochs 8 \
 --gradient_accumulation_steps 1 \
 --overwrite_output_dir \
---data_dir ./data/ \
---output_dir ./desc_dfs/  \
+--data_dir ./ \
+--output_dir ./desc_gs/  \
 --model_name_or_path $pretrained_model
 ```
 
 ## CodeSearch Fine-Tune 
 
-```sh
-./run_code_desc.sh
+```bash
+bash run_desc_code.sh
 ```
 
 ```sh
-pretrained_model=./desc_dfs/checkpoint-best
+pretrained_model=./desc_gs/checkpoint-best
 
 python3 run_classifier.py \
 --model_type roberta \
@@ -78,8 +91,8 @@ python3 run_classifier.py \
 --do_train \
 --do_eval \
 --eval_all_checkpoints \
---train_file ps_train.txt \
---dev_file ps_valid.txt \
+--train_file desc_code_train.txt \
+--dev_file desc_code_valid.txt \
 --max_seq_length 200 \
 --per_gpu_train_batch_size 8 \
 --per_gpu_eval_batch_size 8 \
@@ -87,8 +100,8 @@ python3 run_classifier.py \
 --num_train_epochs 8 \
 --gradient_accumulation_steps 1 \
 --overwrite_output_dir \
---data_dir ./data/ \
---output_dir ./code_desc/  \
+--data_dir ./ \
+--output_dir ./desc_code/  \
 --model_name_or_path $pretrained_model
 
 ```
@@ -96,7 +109,7 @@ python3 run_classifier.py \
 ## Infer
 
 ```sh
-./run_test.sh
+bash run_test.sh
 ```
 
 ```sh
@@ -107,15 +120,15 @@ do
     --model_name_or_path ./codebert-base \
     --task_name codesearch \
     --do_predict \
-    --output_dir ./code_desc/ \
-    --data_dir ./test/ \
+    --output_dir ./desc_code/ \
+    --data_dir ./test/test/java/ \
     --max_seq_length 200 \
     --per_gpu_train_batch_size 128 \
     --per_gpu_eval_batch_size 128 \
     --learning_rate 1e-5 \
     --num_train_epochs 8 \
     --test_file batch_${i}.txt \
-    --pred_model_dir ./code_desc/checkpoint-best/ \
+    --pred_model_dir ./desc_code/checkpoint-best/ \
     --test_result_dir ./results/$lang/${i}_batch_result.txt
 done
 ```
