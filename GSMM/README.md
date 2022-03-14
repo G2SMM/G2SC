@@ -7,7 +7,8 @@ PyTorch implementation of [GSMM]
 * Python 3.6.2
 * PyTorch 1.8.0
 * tqdm 4.59.0
-
+* tables 3.6.1
+* nltk 3.5
 
 ## Code Structures
 
@@ -31,8 +32,7 @@ PyTorch implementation of [GSMM]
   The `/data` folder provides a small dummy dataset for quick deployment.  
   To train and test our model:
   
-  1) Download and unzip real dataset from [Google Drive](https://drive.google.com/file/d/1kyxeQdeVHLjigIF-mihEbfZGgP2UWGI8/view?usp=sharing
-)
+  1) Download and unzip real dataset from [Google Drive]()
   
   2) Replace each file in the `/data` folder with the corresponding real file. 
   
@@ -51,6 +51,7 @@ PyTorch implementation of [GSMM]
    python repr_code.py --model JointEmbeder --reload_from XXX
    ```
    where `XXX` represents the iteration with the best model.
+   For the step10000.h5 model file, we use python repr_code.py --model JointEmbeder --reload_from 10000
    
    ### Search
    
@@ -58,6 +59,7 @@ PyTorch implementation of [GSMM]
    python search.py --model JointEmbeder --reload_from XXX
    ```
    where `XXX` represents the iteration with the best model.
+   
    ### Search with txt document
    
    ```bash
