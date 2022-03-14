@@ -1,5 +1,9 @@
 # Code Search
 
+```sh
+pip install transformers
+```
+
 ## Data Process
 
 - The dataset is randomly shuffled, the proportion of training set, validation set and test set is 8:1:1.
