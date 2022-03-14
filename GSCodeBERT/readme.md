@@ -58,7 +58,7 @@ python process_test_data.py
 
 ## Fine-Tune with DFSCode
 
-We further trained the model after adding DFScode data
+We further trained the model after adding G2SC data
 
 ```sh
 bash run_desc_gs.sh
