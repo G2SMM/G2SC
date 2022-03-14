@@ -45,6 +45,13 @@ build('valid.json', 'desc_code_valid','dfs')
 
 ​        
 
+For this step, run: 
+
+```sh
+python process_data.py bulid()
+python process_test_data.py
+```
+
 ## Fine-Tune with DFSCode
 
 We further trained the model after adding DFScode data
