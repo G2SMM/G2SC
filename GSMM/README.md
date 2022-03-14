@@ -52,7 +52,7 @@ PyTorch implementation of [GSMM]
    ```
    where `XXX` represents the iteration with the best model.
    
-   For the step10000.h5 model file, we use python repr_code.py --model JointEmbeder --reload_from 10000
+   For the step10000.h5 model file, we use "python repr_code.py --model JointEmbeder --reload_from 10000"
    
    ### Search
    
