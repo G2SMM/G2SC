@@ -71,7 +71,7 @@ python process_test_data.py
 
 
 
-## Fine-Tune with DFSCode
+## Fine-Tune with PDG sequence
 
 We fine-tuned the model on 2*NVIDIA 2080ti GPUs.
 
