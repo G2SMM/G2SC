@@ -61,6 +61,8 @@ PyTorch implementation of [GSMM]
    ```
    where `XXX` represents the iteration with the best model.
    
+   For the step10000.h5 model file, we use "python search.py --model JointEmbeder --reload_from 10000"
+   
    ### Search with txt document
    
    ```bash
@@ -68,10 +70,14 @@ PyTorch implementation of [GSMM]
    ```
    where `XXX` represents the iteration with the best model,and the query document is stored in `/data` folder
    
+   For the step10000.h5 model file, we use "python txt_search_query.py --model JointEmbeder --reload_from 10000"
+   
    ### Automatic evaluation
    
    ```bash
    python auto_eval.py --model JointEmbeder --reload_from XXX
    ```
    where `XXX` represents the iteration with the best model.
+   
+   For the step10000.h5 model file, we use "python auto_eval.py --model JointEmbeder --reload_from 10000"
  
