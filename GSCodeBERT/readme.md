@@ -75,7 +75,7 @@ python process_test_data.py
 
 We fine-tuned the model on 2*NVIDIA 2080ti GPUs.
 
-We further trained the model after adding DFScode data
+We further trained the model after adding PDG sequence data
 
 ```sh
 bash run_desc_gs.sh
